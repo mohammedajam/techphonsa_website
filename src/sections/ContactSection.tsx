@@ -3,7 +3,7 @@ import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  useRevealOnScroll(sectionRef, '.contact-anim');
+  useRevealOnScroll(sectionRef, '.contact-anim', { repeat: true });
 
   return (
     <section ref={sectionRef} id="contact" className="contact-minimal-layout section" style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh' }}>
@@ -18,11 +18,11 @@ const ContactSection = () => {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <header className="contact-header section" aria-labelledby="contact-title">
           <div className="container">
-            <span className="section-header__eyebrow">LET'S TALK ABOUT WHAT YOU NEED</span>
+            <span className="section-header__eyebrow contact-anim contact-anim--eyebrow">LET'S TALK ABOUT WHAT YOU NEED</span>
             <h1 className="section-header__title section-header__title--large contact-anim" id="contact-title">
               Contact Us
             </h1>
-            <span className="section-header__rule" aria-hidden="true"></span>
+            <span className="section-header__rule contact-anim contact-anim--rule" aria-hidden="true"></span>
           </div>
         </header>
 
@@ -36,15 +36,15 @@ const ContactSection = () => {
                 </p>
 
                 <div className="contact-info-list" role="list">
-                  <div className="contact-info-item" role="listitem">
+                  <div className="contact-info-item contact-anim contact-anim--info" role="listitem">
                     <span className="contact-info-item__label">Response time</span>
                     <span className="contact-info-item__value">We aim to respond within one business day.</span>
                   </div>
-                  <div className="contact-info-item" role="listitem">
+                  <div className="contact-info-item contact-anim contact-anim--info" role="listitem">
                     <span className="contact-info-item__label">What to expect</span>
                     <span className="contact-info-item__value">A short conversation about what you need. We'll tell you honestly if we're the right fit.</span>
                   </div>
-                  <div className="contact-info-item" role="listitem">
+                  <div className="contact-info-item contact-anim contact-anim--info" role="listitem">
                     <span className="contact-info-item__label">No obligation</span>
                     <span className="contact-info-item__value">Getting in touch doesn't commit you to anything. We just want to understand your situation.</span>
                   </div>

@@ -99,7 +99,7 @@
   --container-max: 1200px;
   --container-px:  clamp(var(--s-4), 5vw, var(--s-10));
   --nav-h:         80px;
-  --section-py:    clamp(var(--s-16), 12vw, var(--s-32));
+  --section-py:    clamp(var(--s-12), 8vw, var(--s-24));
 }
 
 
@@ -149,6 +149,7 @@ input, textarea, select {
   padding-block: var(--section-py);
   position: relative;
   z-index: var(--z-content);
+  scroll-margin-top: calc(var(--nav-h) + var(--s-4));
 }
 
 /* ── TYPOGRAPHY BASE ───────────────────────────────────────── */

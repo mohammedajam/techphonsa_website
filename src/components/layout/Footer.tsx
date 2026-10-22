@@ -18,7 +18,6 @@ const Footer = () => {
             <a href="#services">Services</a>
             <a href="#contact">Contact</a>
           </nav>
-          <p className="footer__meta" aria-hidden="true">SYS.STATUS // OPERATIONAL</p>
         </div>
       </div>
     </footer>
