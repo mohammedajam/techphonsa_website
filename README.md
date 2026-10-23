@@ -1,5 +1,9 @@
 # React + TypeScript + Vite
 
+## Production deployment
+
+The site is configured for Vercel. See [DEPLOYMENT.md](DEPLOYMENT.md) for the one-time approval setup and the single-command release procedure.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

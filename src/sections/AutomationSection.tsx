@@ -20,8 +20,8 @@ const AutomationSection = () => {
         <span className="service-card__pill">Lead Routing</span>
         <span className="service-card__pill">24/7</span>
       </div>
-      <a href="/services#automation" className="btn-primary btn-primary--secondary" style={{ width: 'fit-content', marginTop: 'auto' }}>
-        Learn more <span className="btn-arrow" aria-hidden="true">&#8594;</span>
+      <a href="#contact" className="btn-primary btn-primary--secondary" style={{ width: 'fit-content', marginTop: 'auto' }}>
+        Discuss automation <span className="btn-arrow" aria-hidden="true">&#8594;</span>
       </a>
     </article>
   );
