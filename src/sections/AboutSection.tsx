@@ -3,34 +3,36 @@ import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  useRevealOnScroll(sectionRef, '.about-anim', { repeat: true });
+  useRevealOnScroll(sectionRef, '.about-anim');
 
   return (
-    <section ref={sectionRef} id="about" className="about-section section" aria-labelledby="about-title">
+    <section ref={sectionRef} id="about" className="about-section section" aria-labelledby="about-heading">
       {/* Ambient background glow orb */}
       <div className="about-ambient-glow" aria-hidden="true" />
 
       <div className="container about-container">
 
-        {/* EDITORIAL SECTION HEADING & BADGE */}
-        <div className="about-header-wrap about-anim">
-          <h2 className="about-editorial-heading" id="about-heading">
-            <span className="about-editorial-heading__word">About</span>{' '}
-            <span className="about-editorial-heading__word">Techphonsa</span>
-          </h2>
-          <div className="about-header-line" aria-hidden="true" />
-        </div>
+        {/* 1. OPENING: EDITORIAL HEADING & INTRODUCTION */}
+        <header className="about-header">
+          <div className="about-header-wrap about-anim">
+            <h2 className="about-editorial-heading" id="about-heading">
+              <span className="about-editorial-heading__word">About</span>{' '}
+              <span className="about-editorial-heading__word">Techphonsa</span>
+            </h2>
+          </div>
 
-        {/* 1. INTRODUCTION */}
-        <div className="about-intro about-anim">
-          <h2 className="about-intro__title" id="about-title">
-            <span className="about-line"><span className="about-line__inner">A technology studio</span></span>
-            <span className="about-line"><span className="about-line__inner">for practical problems.</span></span>
-          </h2>
-          <p className="about-intro__lead">
-            Techphonsa is a technology studio that helps small businesses get online, work more efficiently, and make practical use of AI.
-          </p>
-        </div>
+          <div className="about-intro about-anim">
+            <h3 className="about-intro__title" id="about-title">
+              <span className="about-line"><span className="about-line__inner">A technology studio</span></span>
+              <span className="about-line"><span className="about-line__inner">for practical problems.</span></span>
+            </h3>
+            <p className="about-intro__lead">
+              Techphonsa is a technology studio that helps small businesses get online, work more efficiently, and make practical use of AI.
+            </p>
+          </div>
+        </header>
+
+        <hr className="about-divider about-anim" aria-hidden="true" />
 
         {/* 2. OUR STORY */}
         <div className="about-block about-story">
@@ -75,6 +77,8 @@ const AboutSection = () => {
             </div>
           </div>
         </div>
+
+        <hr className="about-divider about-anim" aria-hidden="true" />
 
         {/* 4. TECHNICAL EXPERTISE */}
         <div className="about-block about-expertise">
@@ -139,6 +143,8 @@ const AboutSection = () => {
           </div>
         </div>
 
+        <hr className="about-divider about-anim" aria-hidden="true" />
+
         {/* 5. WHAT THIS MEANS FOR YOU */}
         <div className="about-benefits-section">
           <div className="about-benefits-header">
@@ -171,10 +177,6 @@ const AboutSection = () => {
               </div>
               <div className="benefit-card__footer">
                 <span className="benefit-card__link">Direct communication</span>
-                <svg className="benefit-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
               </div>
             </div>
 
@@ -209,10 +211,6 @@ const AboutSection = () => {
               </div>
               <div className="benefit-card__footer">
                 <span className="benefit-card__link">Engineered to scale</span>
-                <svg className="benefit-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
               </div>
             </div>
 
@@ -239,10 +237,6 @@ const AboutSection = () => {
               </div>
               <div className="benefit-card__footer">
                 <span className="benefit-card__link">Transparent feasibility</span>
-                <svg className="benefit-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
               </div>
             </div>
           </div>
