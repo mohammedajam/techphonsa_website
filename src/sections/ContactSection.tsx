@@ -1,9 +1,31 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import type { FormEvent } from 'react';
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [submissionState, setSubmissionState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   useRevealOnScroll(sectionRef, '.contact-anim', { repeat: true });
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setSubmissionState('submitting');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/techphonsa@gmail.com', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) throw new Error('Unable to send enquiry');
+      form.reset();
+      setSubmissionState('success');
+    } catch {
+      setSubmissionState('error');
+    }
+  };
 
   return (
     <section ref={sectionRef} id="contact" className="contact-minimal-layout section" style={{ position: 'relative', overflow: 'hidden', minHeight: '100vh' }}>
@@ -58,13 +80,16 @@ const ContactSection = () => {
                   <p className="contact-form-panel__hint">A few details are enough to get the conversation started.</p>
                 </div>
 
-                <div id="form-body">
+                <div id="form-body" aria-live="polite">
                   <form
                     id="contact-form"
                     className="contact-form"
                     action="https://formsubmit.co/techphonsa@gmail.com"
                     method="POST"
                     aria-label="Contact form"
+                    aria-busy={submissionState === 'submitting'}
+                    hidden={submissionState === 'success'}
+                    onSubmit={handleSubmit}
                   >
                     <input type="hidden" name="_subject" value="New inquiry from Techphonsa Website!" />
                     <input type="hidden" name="_captcha" value="false" />
@@ -108,12 +133,25 @@ const ContactSection = () => {
 
                     <div className="contact-form__submit-row">
                       <p className="contact-form__disclaimer">Your details are only used to respond to your enquiry.</p>
-                      <button type="submit" className="hud-btn hud-btn--primary hud-btn--submit" id="form-submit">
-                        Send enquiry
+                      <button type="submit" className="hud-btn hud-btn--primary hud-btn--submit" id="form-submit" disabled={submissionState === 'submitting'}>
+                        {submissionState === 'submitting' ? 'Sending…' : 'Send enquiry'}
                         <span className="btn-arrow" aria-hidden="true">→</span>
                       </button>
                     </div>
+                    {submissionState === 'error' && (
+                      <p className="contact-form__error" role="alert">We couldn’t send your enquiry. Please try again in a moment.</p>
+                    )}
                   </form>
+                  {submissionState === 'success' && (
+                    <div className="contact-form-success" role="status">
+                      <span className="contact-form-success__icon" aria-hidden="true">✓</span>
+                      <h3>Thanks — your enquiry is on its way.</h3>
+                      <p>We’ll get back to you within one business day.</p>
+                      <button type="button" className="contact-form-success__reset" onClick={() => setSubmissionState('idle')}>
+                        Send another enquiry
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

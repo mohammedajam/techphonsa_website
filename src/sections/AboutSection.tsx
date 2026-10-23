@@ -3,12 +3,14 @@ import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 const AboutSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  useRevealOnScroll(sectionRef, '.about-anim');
+  useRevealOnScroll(sectionRef, '.about-anim', { repeat: true });
 
   return (
     <section ref={sectionRef} id="about" className="about-section section" aria-labelledby="about-heading">
       {/* Ambient background glow orb */}
       <div className="about-ambient-glow" aria-hidden="true" />
+      <div className="about-ambient-grid" aria-hidden="true" />
+      <div className="about-ambient-orbit" aria-hidden="true" />
 
       <div className="container about-container">
 
