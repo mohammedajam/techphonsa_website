@@ -191,44 +191,27 @@
 /* For mobile */
 @media (max-width: 899px) {
   .wwb-scroll-track {
-    height: auto;
+    height: 320vh;
   }
   .wwb-section .container,
   .wwb-grid {
-    height: auto;
+    height: 100%;
   }
+  .wwb-grid { grid-template-rows: auto 1fr; gap: var(--s-8); }
   .wwb-sticky-container {
-    position: relative;
-    top: auto;
+    position: sticky;
+    top: calc(var(--nav-h) + var(--s-4));
+    align-self: start;
   }
   
   .wwb-card-stage {
-    position: relative;
-    top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    overflow: visible;
-    background: transparent;
+    position: sticky;
+    top: calc(var(--nav-h) + var(--s-12));
+    display: grid;
+    min-height: min(62vh, 620px);
   }
 
   .wwb-section .flow-card {
-    background: rgb(18, 18, 26) !important;
-    border: 1px solid var(--border-dim) !important;
-    border-radius: 12px !important;
-  }
-  
-  .wwb-card-slot,
-  .wwb-card-slot.is-past,
-  .wwb-card-slot.is-future,
-  .wwb-card-slot.is-active {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: none !important;
-    transition: none !important;
+    padding: 20px;
   }
 }

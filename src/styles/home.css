@@ -498,7 +498,7 @@
   background-color: var(--bg-void);
   color: var(--text-strong);
   /* overflow visible so fixed cards are not clipped */
-  padding-bottom: 30vh; /* gives the deck time to clear out completely before the next section */
+  padding-bottom: 12vh;
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -506,7 +506,7 @@
    ════════════════════════════════════════════════════════════ */
 .hww-title-track {
   position: relative;
-  height: 250vh;
+  height: 170vh;
   width: 100%;
 }
 
@@ -547,7 +547,7 @@
 .hww-deck-track {
   position: relative;
   /* Shorter runway keeps the deck responsive instead of feeling pinned. */
-  height: 330vh;
+  height: 250vh;
   width: 100%;
 }
 
@@ -733,18 +733,26 @@
 /* ════════════════════════════════════════════════════════════
    MOBILE RESPONSIVE
    ════════════════════════════════════════════════════════════ */
-@media (max-width: 640px) {
-  /* Shrink the scroll runway proportionally */
+@media (max-width: 767px) {
+  /* Mobile uses the static deck below to keep scrolling responsive. */
   .hww-title-track {
-    height: 220vh;
+    height: auto;
+    padding: 96px 0 48px;
   }
 
   .hww-deck-track {
-    height: 460vh;
+    display: none;
   }
 
   .hww-headline {
     font-size: clamp(28px, 10vw, 48px);
+  }
+
+  .hww-static-fallback {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 20px 72px;
   }
 }
 

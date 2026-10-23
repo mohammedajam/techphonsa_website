@@ -70,6 +70,15 @@ const HowWeWork = () => {
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+    if (prefersReduced || isMobile) {
+      [word1Ref.current, word2Ref.current, word3Ref.current].forEach((el) => {
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
+      return;
+    }
+
     let rafId: number | null = null;
 
     /* ── scroll progress for a track element ────────────────────────── */
@@ -254,12 +263,6 @@ const HowWeWork = () => {
     };
 
     // Reduced-motion: show everything immediately
-    if (prefersReduced) {
-      [word1Ref.current, word2Ref.current, word3Ref.current].forEach((el) => {
-        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
-      });
-    }
-
     // Geometry is measured only at startup and resize; scroll writes are transform-only.
     measureCards();
     applyCardStyles();
