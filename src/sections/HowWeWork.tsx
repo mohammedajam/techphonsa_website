@@ -70,16 +70,8 @@ const HowWeWork = () => {
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-
-    if (prefersReduced || isMobile) {
-      [word1Ref.current, word2Ref.current, word3Ref.current].forEach((el) => {
-        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
-      });
-      return;
-    }
-
     let rafId: number | null = null;
+    let isNearViewport = true;
 
     /* ── scroll progress for a track element ────────────────────────── */
     const trackProgress = (trackEl: HTMLDivElement): number => {
@@ -249,6 +241,7 @@ const HowWeWork = () => {
 
     /* ── scroll / resize handler ─────────────────────────────────────── */
     const onScroll = () => {
+      if (!isNearViewport) return;
       if (rafId !== null) return;
       rafId = window.requestAnimationFrame(() => {
         rafId = null;
@@ -263,10 +256,29 @@ const HowWeWork = () => {
     };
 
     // Reduced-motion: show everything immediately
+    if (prefersReduced) {
+      [word1Ref.current, word2Ref.current, word3Ref.current].forEach((el) => {
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
+    }
+
     // Geometry is measured only at startup and resize; scroll writes are transform-only.
     measureCards();
     applyCardStyles();
     onScroll();
+
+    const section = deckTrackRef.current?.closest<HTMLElement>('.hww-editorial-section');
+    const visibilityObserver = section
+      ? new IntersectionObserver(
+          ([entry]) => {
+            isNearViewport = entry.isIntersecting;
+            if (isNearViewport) onScroll();
+          },
+          { rootMargin: '120% 0px 120% 0px' },
+        )
+      : null;
+
+    if (section) visibilityObserver?.observe(section);
 
     window.addEventListener('scroll', onScroll,         { passive: true });
     window.addEventListener('resize', measureCards,  { passive: true });
@@ -274,6 +286,7 @@ const HowWeWork = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', measureCards);
+      visibilityObserver?.disconnect();
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
@@ -312,7 +325,7 @@ const HowWeWork = () => {
                 aria-label={`Principle ${card.num}: ${card.title}`}
               >
                 <div className="hww-card__image-wrap">
-                  <img src={card.image} alt={`How We Work — ${card.title}`} className="hww-card__image" />
+                  <img src={card.image} alt={`How We Work — ${card.title}`} className="hww-card__image" loading="lazy" decoding="async" />
                 </div>
                 <div className="hww-card__content">
                   <span className="hww-card__num">{card.num}</span>
@@ -338,7 +351,7 @@ const HowWeWork = () => {
         {CARDS.map((card) => (
           <div key={`static-${card.id}`} className="hww-static-card">
             <div className="hww-card__image-wrap">
-              <img src={card.image} alt="" className="hww-card__image" />
+              <img src={card.image} alt="" className="hww-card__image" loading="lazy" decoding="async" />
             </div>
             <div className="hww-card__content">
               <span className="hww-card__num">{card.num}</span>

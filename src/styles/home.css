@@ -498,7 +498,7 @@
   background-color: var(--bg-void);
   color: var(--text-strong);
   /* overflow visible so fixed cards are not clipped */
-  padding-bottom: 12vh;
+  padding-bottom: 30vh; /* gives the deck time to clear out completely before the next section */
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -506,7 +506,7 @@
    ════════════════════════════════════════════════════════════ */
 .hww-title-track {
   position: relative;
-  height: 170vh;
+  height: 250vh;
   width: 100%;
 }
 
@@ -547,7 +547,7 @@
 .hww-deck-track {
   position: relative;
   /* Shorter runway keeps the deck responsive instead of feeling pinned. */
-  height: 250vh;
+  height: 330vh;
   width: 100%;
 }
 
@@ -596,7 +596,8 @@
   overflow: hidden;
   box-shadow: none;
   isolation: isolate;
-  will-change: transform, opacity;
+  contain: layout paint;
+  will-change: transform;
   opacity: 0;
 }
 
@@ -733,26 +734,20 @@
 /* ════════════════════════════════════════════════════════════
    MOBILE RESPONSIVE
    ════════════════════════════════════════════════════════════ */
-@media (max-width: 767px) {
-  /* Mobile uses the static deck below to keep scrolling responsive. */
+@media (max-width: 640px) {
+  /* Preserve the desktop card-deck interaction with a shorter mobile runway. */
   .hww-title-track {
-    height: auto;
-    padding: 96px 0 48px;
+    height: 150vh;
   }
 
   .hww-deck-track {
-    display: none;
+    height: 280vh;
   }
+
+  .hww-editorial-section { padding-bottom: 12vh; }
 
   .hww-headline {
     font-size: clamp(28px, 10vw, 48px);
-  }
-
-  .hww-static-fallback {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 20px 72px;
   }
 }
 
